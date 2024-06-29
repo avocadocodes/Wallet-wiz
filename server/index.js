@@ -6,5 +6,5 @@ const app=express()
 
 app.listen(3000,()=>{
     console.log("on port 3000")
-    mongoose.connect()
+    // mongoose.connect()
 })
