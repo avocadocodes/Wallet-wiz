@@ -1,7 +1,7 @@
 
 
-import React, { useState } from 'react';
-
+import  { useState } from 'react';
+import axios from 'axios'
 export function Signup(){
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -96,4 +96,4 @@ export function Signup(){
       </form>
     </div>
   );
-};
+}

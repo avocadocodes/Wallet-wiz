@@ -1,6 +1,6 @@
 
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+// import { Link } from 'react-router-dom';
 import axios from 'axios'
 
 export  function Login() {
@@ -15,10 +15,11 @@ export  function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-full max-w-sm">
+    <div >
+      <div className="bg-gray-900 rounded-lg shadow-lg p-6 w-full max-w-sm"> 
+      <form onSubmit={handleSubmit} className="space-y-6">
         <h2 className="text-2xl font-bold mb-4">Login</h2>
-        <div className="mb-4">
+        <div className="space-y-2">
           <label htmlFor="email" className="block text-gray-700">Email</label>
           <input
             type="email"
@@ -47,6 +48,7 @@ export  function Login() {
           Dont have an account? <a href="/signup" className="text-blue-500">Create one</a>
         </button>
       </form>
+      </div>
     </div>
   );
 }
