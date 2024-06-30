@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import './Signup.css'; 
 
-const Signup = () => {
+export function Signup(){
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -93,5 +93,3 @@ const Signup = () => {
     </div>
   );
 };
-
-export default Signup;
