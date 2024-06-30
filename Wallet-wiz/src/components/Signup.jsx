@@ -1,7 +1,6 @@
 
 
 import React, { useState } from 'react';
-import './Signup.css'; 
 
 export function Signup(){
   const [name, setName] = useState('');
