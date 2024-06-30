@@ -2,14 +2,14 @@
 
 import React, { useState } from 'react';
 import './Signup.css'; 
-
+import axios from 'axios'
 export function Signup(){
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -34,7 +34,8 @@ export function Signup(){
       alert('Passwords do not match');
       return;
     }
-
+    const res=await axios.post('http://localhost:3000/signUp',{name:name,email:email,password:password}).then((res)=>{console.log(res)}).catch((e)=>{console.log(e)})
+    console.log(res)
     console.log('Name:', name);
     console.log('Email:', email);
     console.log('Password:', password);
