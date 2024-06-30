@@ -1,7 +1,6 @@
 
 
-import React, { useState } from 'react';
-import './Signup.css'; 
+import  { useState } from 'react';
 import axios from 'axios'
 export function Signup(){
   const [name, setName] = useState('');
@@ -42,11 +41,11 @@ export function Signup(){
   };
 
   return (
-    <div className="signup-container">
-      <form onSubmit={handleSubmit} className="signup-form">
-        <h2>Sign Up</h2>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
+    <div  className="flex justify-center items-center h-screen bg-gray-100">
+      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-full max-w-sm">
+        <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
+        <div className="mb-4">
+          <label htmlFor="name" className="block text-gray-700">Name</label>
           <input
             type="text"
             id="name"
@@ -54,10 +53,11 @@ export function Signup(){
             onChange={(e) => setName(e.target.value)}
             required
             placeholder="Enter your name"
+            className="w-full px-3 py-2 border border-gray-300 rounded"
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-gray-700">Email</label>
           <input
             type="email"
             id="email"
@@ -65,10 +65,11 @@ export function Signup(){
             onChange={(e) => setEmail(e.target.value)}
             required
             placeholder="Enter your email"
+            className="w-full px-3 py-2 border border-gray-300 rounded"
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
+        <div className="mb-4">
+          <label htmlFor="password" className="block text-gray-700">Password</label>
           <input
             type="password"
             id="password"
@@ -76,10 +77,11 @@ export function Signup(){
             onChange={(e) => setPassword(e.target.value)}
             required
             placeholder="Enter your password"
+            className="w-full px-3 py-2 border border-gray-300 rounded"
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm Password</label>
+        <div className="mb-4">
+          <label htmlFor="confirmPassword" className="block text-gray-700">Confirm Password</label>
           <input
             type="password"
             id="confirmPassword"
@@ -87,10 +89,11 @@ export function Signup(){
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
             placeholder="Confirm your password"
+            className="w-full px-3 py-2 border border-gray-300 rounded"
           />
         </div>
-        <button type="submit" className="signup-button">Sign Up</button>
+        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">Sign Up</button>
       </form>
     </div>
   );
-};
+}
