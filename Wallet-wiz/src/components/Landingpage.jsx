@@ -1,11 +1,11 @@
 import  { useEffect, useState } from 'react';
 import SideBar from './SideBar';
 import Transaction from './Transaction';
-import { setStatus } from '../Store/userDataSlice';
 import { useDispatch,useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 export function Landingpage() {
   const [transactions, setTransactions] = useState([]);
-
+  const userStatus=useSelector(state=>state.userStatus)
   const [newTransaction, setNewTransaction] = useState({
     user: '',
     amount: 0,
@@ -40,6 +40,13 @@ export function Landingpage() {
   },[])
   return (
     <div className="flex h-screen">
+      {
+        !userStatus.userStatus.loggedIn? 
+        <div>
+          LOGIN
+        </div>
+        :
+      <div>
       <SideBar/>
       <div className="flex-1 p-6">
         <div className="flex justify-between items-center mb-6">
@@ -65,6 +72,8 @@ export function Landingpage() {
           <Transaction email='x' amount='0' action='x' time='1' name='x'/>
         </div>
       </div>
+      </div>
+      }
     </div>
   );
 }

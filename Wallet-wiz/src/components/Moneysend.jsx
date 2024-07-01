@@ -1,13 +1,19 @@
-
-import { useState } from 'react';
-
+import React, { useState } from 'react';
+import axios from 'axios'
+import { useSelector } from 'react-redux';
 const MoneySend = ({ show, onClose }) => {
   const [email, setEmail] = useState('');
   const [amount, setAmount] = useState('');
-
-  const handleSend = () => {
+  const userStatus=useSelector(state=>state.userStatus)
+  const handleSend = async(e) => {
+    e.preventDefault();
     console.log(`Sending $${amount} to ${email}`);
-  
+    try {
+      const res=await axios.post('http://localhost:3000/sendMoney',{senderEmail:userStatus.userStatus.email,recieverEmail:email,amount:amount}) 
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
     onClose();
   };
 

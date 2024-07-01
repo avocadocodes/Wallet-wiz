@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState ={
     userStatus:{
+        loggedIn:false,
         name:'',
         email:'',
         password:0,
@@ -16,6 +17,7 @@ export const userStatusSlice= createSlice({
             state.userStatus.name=action.payload.name
             state.userStatus.email=action.payload.email
             state.userStatus.password=action.payload.password
+            state.userStatus.loggedIn=true
         },
         increaseBalance:(state,action)=>{
             state.balance=state.balance+action.payload.amount

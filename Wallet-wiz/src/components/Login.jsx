@@ -15,7 +15,7 @@ export  function Login() {
     try {
       const res=await axios.post('http://localhost:3000/login',{email:email,password:password})
       if(res.status==200){
-        await dispatch(setStatus({email:email,password:password,name:res.data.name}))
+        await dispatch(setStatus({email:email,password:password,name:res.data.name,loggedIn:true}))
         navigate('../landingPage')
     }
     } catch (error) {

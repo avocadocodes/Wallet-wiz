@@ -13,11 +13,7 @@ import { store } from './Store/store.js';
 const router=createBrowserRouter([
   {
     path:'/',
-    element: <App />
-  },
-  {
-    path:'/login',
-    element:<Login/>
+    element: <Login />
   },
   {
     path:'/signup',
