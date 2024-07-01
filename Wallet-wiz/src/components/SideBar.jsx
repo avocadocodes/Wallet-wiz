@@ -1,4 +1,4 @@
-// src/Sidebar.jsx
+
 import  { useState } from 'react';
 import MoneySend from './Moneysend.jsx';
 

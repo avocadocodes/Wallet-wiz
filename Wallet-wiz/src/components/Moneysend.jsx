@@ -1,4 +1,4 @@
-// src/MoneySend.jsx
+
 import { useState } from 'react';
 
 const MoneySend = ({ show, onClose }) => {
@@ -7,7 +7,7 @@ const MoneySend = ({ show, onClose }) => {
 
   const handleSend = () => {
     console.log(`Sending $${amount} to ${email}`);
-    // You can add logic to handle the money sending process
+  
     onClose();
   };
 
@@ -31,7 +31,7 @@ const MoneySend = ({ show, onClose }) => {
             type="email" 
             value={email} 
             onChange={(e) => setEmail(e.target.value)} 
-            className="w-full px-4 py-2 border rounded-lg mt-1"
+            className="w-full px-4 py-2 border rounded-lg mt-1 text-black"
           />
         </div>
         <div className="mb-4">
@@ -40,7 +40,7 @@ const MoneySend = ({ show, onClose }) => {
             type="number" 
             value={amount} 
             onChange={(e) => setAmount(e.target.value)} 
-            className="w-full px-4 py-2 border rounded-lg mt-1"
+            className="w-full px-4 py-2 border rounded-lg mt-1 text-black"
           />
         </div>
         <button 
