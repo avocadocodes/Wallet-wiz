@@ -1,19 +1,27 @@
 
-import { useState } from 'react';
-// import { Link } from 'react-router-dom';
+import { useState,useEffect } from 'react';
 import axios from 'axios'
-
+import { setStatus } from '../Store/userDataSlice';
+import { useDispatch,useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 export  function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const dispatch=useDispatch()
+  const userStatus=useSelector(state=>state.userStatus)
+  const navigate=useNavigate()
   const handleSubmit = async(e) => {
     e.preventDefault();
-    const res=await axios.post('http://localhost:3000/login',{email:email,password:password}).then((res)=>{console.log(res)}).catch((e)=>{console.log(e)})
-    console.log('Email:', email);
-    console.log('Password:', password);
+    try {
+      const res=await axios.post('http://localhost:3000/login',{email:email,password:password})
+      if(res.status==200){
+        await dispatch(setStatus({email:email,password:password,name:res.data.name}))
+        navigate('../landingPage')
+    }
+    } catch (error) {
+      console.log(error)
+    }
   };
-
   return (
     <div >
       <div className="bg-gray-900 rounded-lg shadow-lg p-6 w-full max-w-sm"> 

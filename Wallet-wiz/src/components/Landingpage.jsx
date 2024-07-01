@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SideBar from './SideBar';
 import Transaction from './Transaction';
+import { setStatus } from '../Store/userDataSlice';
+import { useDispatch,useSelector } from 'react-redux';
 export function Landingpage() {
   const [transactions, setTransactions] = useState([]);
 
@@ -33,7 +35,9 @@ export function Landingpage() {
   }, 0);
 
   const balance = moneyReceived - moneySent;
+  useEffect(()=>{
 
+  },[])
   return (
     <div className="flex h-screen">
       <SideBar/>

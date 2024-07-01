@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-const TransactionsModel=new mongoose.Schema(
+const TransactionSchema=new mongoose.Schema(
     {
         accountId:{
             type:String,
@@ -31,3 +31,4 @@ const TransactionsModel=new mongoose.Schema(
         ]
     }
 )
+const transactionModel=mongoose.model('Transactions',TransactionSchema)
