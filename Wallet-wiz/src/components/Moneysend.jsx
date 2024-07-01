@@ -9,6 +9,7 @@ const MoneySend = ({ show, onClose }) => {
     e.preventDefault();
     console.log(`Sending $${amount} to ${email}`);
     try {
+      console.log(userStatus.userStatus.email)
       const res=await axios.post('http://localhost:3000/sendMoney',{senderEmail:userStatus.userStatus.email,recieverEmail:email,amount:amount}) 
       console.log(res)
     } catch (error) {

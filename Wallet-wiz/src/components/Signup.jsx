@@ -1,11 +1,15 @@
 import  { useState } from 'react';
 import axios from 'axios'
+import { useDispatch } from 'react-redux';
+import { setStatus } from '../Store/userDataSlice';
+import {useNavigate} from 'react-router-dom'
 export function Signup(){
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
+  const dispatch =useDispatch()
+  const navigate=useNavigate()
   const handleSubmit = async(e) => {
     e.preventDefault();
 
@@ -32,7 +36,7 @@ export function Signup(){
       return;
     }
     try {
-      const res=await axios.post('http://localhost:3000/login',{email:email,password:password})
+      const res=await axios.post('http://localhost:3000/signUp',{email:email,password:password,name:name})
       if(res.status==200){
         await dispatch(setStatus({email:email,password:password,name:name,loggedIn:true}))
         navigate('../landingPage')
