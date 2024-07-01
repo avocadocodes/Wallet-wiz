@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import SideBar from './SideBar';
 import Transaction from './Transaction';
 import { setStatus } from '../Store/userDataSlice';
