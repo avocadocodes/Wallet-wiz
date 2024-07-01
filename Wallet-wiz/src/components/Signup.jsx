@@ -1,12 +1,17 @@
 import  { useState } from 'react';
 import axios from 'axios'
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setStatus } from '../Store/userDataSlice';
+import {Link, useNavigate} from 'react-router-dom'
+import { useSelector } from 'react-redux';
 export function Signup(){
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
+  const dispatch =useDispatch()
+  const navigate=useNavigate()
+  const userStatus = useSelector(state =>state.userStatus)
   const handleSubmit = async(e) => {
     e.preventDefault();
 
@@ -33,9 +38,10 @@ export function Signup(){
       return;
     }
     try {
-      const res=await axios.post('http://localhost:3000/login',{email:email,password:password})
+      const res=await axios.post('http://localhost:3000/signUp',{email:email,password:password,name:name})
       if(res.status==200){
         await dispatch(setStatus({email:email,password:password,name:name,loggedIn:true}))
+        console.log(userStatus.userStatus.loggedIn);
         navigate('../landingPage')
     }
     } catch (error) {
@@ -95,11 +101,7 @@ export function Signup(){
             className="w-full px-3 py-2 border border-gray-300 rounded"
           />
         </div>
-        <div className="mt-4">
-          <Link to="/landingpage">
-          <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">Sign Up</button>
-          </Link>
-        </div>
+        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">Sign Up</button>
         
       </form>
     </div>

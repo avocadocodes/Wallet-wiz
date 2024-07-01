@@ -1,7 +1,6 @@
 
 import { useState,useEffect } from 'react';
 import axios from 'axios'
-import { Link } from 'react-router-dom';
 import { setStatus } from '../Store/userDataSlice';
 import { useDispatch,useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +12,8 @@ export  function Login() {
   const navigate=useNavigate()
   const handleSubmit = async(e) => {
     e.preventDefault();
+    console.log("hi");
+    console.log(userStatus.userStatus.name);
     try {
       const res=await axios.post('http://localhost:3000/login',{email:email,password:password})
       if(res.status==200){
@@ -53,11 +54,8 @@ export  function Login() {
           />
         </div>
         
-        <div className="mt-4">
-          <Link to="/landingpage">
-            <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">Login</button>
-          </Link>
-        </div>
+
+        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">Login</button>
         <button className="mt-4 w-full text-center bg-gray-500 px-6 py-2 rounded" >
           Dont have an account? <a href="/signup" className="text-white 500">Create one</a>
         </button>
