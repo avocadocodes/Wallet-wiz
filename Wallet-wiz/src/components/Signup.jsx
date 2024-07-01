@@ -1,5 +1,3 @@
-
-
 import  { useState } from 'react';
 import axios from 'axios'
 export function Signup(){
@@ -33,11 +31,15 @@ export function Signup(){
       alert('Passwords do not match');
       return;
     }
-    const res=await axios.post('http://localhost:3000/signUp',{name:name,email:email,password:password}).then((res)=>{console.log(res)}).catch((e)=>{console.log(e)})
-    console.log(res)
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Password:', password);
+    try {
+      const res=await axios.post('http://localhost:3000/login',{email:email,password:password})
+      if(res.status==200){
+        await dispatch(setStatus({email:email,password:password,name:name}))
+        navigate('../landingPage')
+    }
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (

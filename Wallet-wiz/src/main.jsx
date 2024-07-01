@@ -7,6 +7,8 @@ import {Landingpage} from './components/Landingpage.jsx';
 import './index.css';
 import './App.css'; 
 import App from './App.jsx';
+import { Provider } from 'react-redux'
+import { store } from './Store/store.js';
 const router=createBrowserRouter([
   {
     path:'/',
@@ -28,7 +30,7 @@ const router=createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <Provider store={store}>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </Provider>
 );

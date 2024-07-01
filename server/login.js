@@ -5,13 +5,15 @@ export async function Login(req,res,next){
         const user=await userModel.findOne({email:email,password:password})
         if(user){
             console.log(user.accountId)
+            res.status(200).json({name:user.name})
         }
         else {
             console.log('not found')
+            res.status(400).json({message:'login unsuccessful'})
         }
     }
     catch(e){
         console.log(e)
     }
-    res.status(200).json({status:true})
+    next()
 }
