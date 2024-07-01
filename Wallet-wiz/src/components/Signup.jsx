@@ -1,5 +1,6 @@
 import  { useState } from 'react';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 export function Signup(){
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -94,7 +95,12 @@ export function Signup(){
             className="w-full px-3 py-2 border border-gray-300 rounded"
           />
         </div>
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">Sign Up</button>
+        <div className="mt-4">
+          <Link to="/landingpage">
+          <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">Sign Up</button>
+          </Link>
+        </div>
+        
       </form>
     </div>
   );

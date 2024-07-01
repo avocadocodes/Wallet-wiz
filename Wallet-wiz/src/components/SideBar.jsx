@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import MoneySend from './Moneysend.jsx'; // Adjust the import path as per your file structure
+import { useState } from 'react';
+import MoneySend from './Moneysend.jsx'; 
 
 function Sidebar() {
   const [showModal, setShowModal] = useState(false);

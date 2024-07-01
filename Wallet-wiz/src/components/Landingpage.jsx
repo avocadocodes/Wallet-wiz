@@ -1,8 +1,8 @@
 import  { useEffect, useState } from 'react';
 import SideBar from './SideBar';
 import Transaction from './Transaction';
-import { useDispatch,useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useDispatch,useSelector } from 'react-redux';
 export function Landingpage() {
   const [transactions, setTransactions] = useState([]);
   const userStatus=useSelector(state=>state.userStatus)
@@ -42,9 +42,15 @@ export function Landingpage() {
     <div className="flex h-screen">
       {
         !userStatus.userStatus.loggedIn? 
-        <div>
-          LOGIN
-        </div>
+        <div className="flex justify-center items-center h-full">
+        <Link to="/">
+          <button className="w-full bg-blue-500 text-white py-4 px-6 rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-xl">
+            LOGIN TO ENTER
+          </button>
+        </Link>
+      </div>
+
+
         :
       <div>
       <SideBar/>
