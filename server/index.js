@@ -7,6 +7,7 @@ import { Signup } from './signup.js'
 import { Login } from './login.js'
 import { sendMoney } from './controllers/sendMoney.js'
 import { requestMoney } from './controllers/requestMoney.js'
+import { generateEmail } from './generateEmail.js'
 const app=express()
 app.use(express.json());
 app.use(cors({
@@ -20,4 +21,5 @@ app.post('/getTransactions',(req,res)=>{})
 app.listen (3000,async()=>{
     connectDb()
     console.log("on port 3000")
+    generateEmail()
 })
