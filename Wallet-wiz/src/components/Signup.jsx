@@ -2,7 +2,8 @@ import  { useState } from 'react';
 import axios from 'axios'
 import { useDispatch } from 'react-redux';
 import { setStatus } from '../Store/userDataSlice';
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import { useSelector } from 'react-redux';
 export function Signup(){
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -10,6 +11,7 @@ export function Signup(){
   const [confirmPassword, setConfirmPassword] = useState('');
   const dispatch =useDispatch()
   const navigate=useNavigate()
+  const userStatus = useSelector(state =>state.userStatus)
   const handleSubmit = async(e) => {
     e.preventDefault();
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -38,6 +40,7 @@ export function Signup(){
       const res=await axios.post('http://localhost:3000/signUp',{email:email,password:password,name:name})
       if(res.status==200){
         await dispatch(setStatus({email:email,password:password,name:name,loggedIn:true}))
+        console.log(userStatus.userStatus.loggedIn);
         navigate('../landingPage')
     }
     } catch (error) {
@@ -98,6 +101,7 @@ export function Signup(){
           />
         </div>
         <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">Sign Up</button>
+        
       </form>
     </div>
   );
