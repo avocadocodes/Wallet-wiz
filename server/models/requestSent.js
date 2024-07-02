@@ -1,19 +1,15 @@
 import mongoose from 'mongoose'
-const TransactionSchema=new mongoose.Schema(
+const RequestSentSchema=new mongoose.Schema(
     {
         accountId:{
             type:String,
             required:true
         },
-        transactionId:{
+        requestSentId:{
             type:String,
             required:true
         },
-        transactionDetail:{
-                action:{
-                    type:String,
-                    required:true
-                },
+        requestSentDetail:{
                 email:{
                     type:String,
                     required:true
@@ -33,5 +29,5 @@ const TransactionSchema=new mongoose.Schema(
         }
     }
 )
-const transactionModel=mongoose.model('Transactions',TransactionSchema)
-export default transactionModel
+const requestSentModel=mongoose.model('requestsSent',RequestSentSchema)
+export default requestSentModel

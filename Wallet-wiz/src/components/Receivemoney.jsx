@@ -12,8 +12,8 @@ const RequestSend = ({ show, onClose }) => {
     console.log(`Requesting $${amount} from ${email}`);
     try {
       console.log(userStatus.userStatus.email);
-      const res = await axios.post('http://localhost:3000/receiveMoney', {
-        requesterEmail: userStatus.userStatus.email,
+      const res = await axios.post('http://localhost:3000/requestMoney', {
+        senderEmail: userStatus.userStatus.email,
         receiverEmail: email,
         amount: amount
       });
