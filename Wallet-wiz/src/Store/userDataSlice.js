@@ -17,7 +17,7 @@ export const userStatusSlice= createSlice({
             state.userStatus.name=action.payload.name
             state.userStatus.email=action.payload.email
             state.userStatus.password=action.payload.password
-            state.userStatus.loggedIn=true
+            state.userStatus.loggedIn=action.payload.loggedIn
         },
         increaseBalance:(state,action)=>{
             state.balance=state.balance+action.payload.amount

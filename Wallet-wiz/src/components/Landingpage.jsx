@@ -46,7 +46,7 @@ export function Landingpage() {
           LOGIN
         </div>
         :
-      <div>
+      <div >
       <SideBar/>
       <div className="flex-1 p-6">
         <div className="flex justify-between items-center mb-6">
@@ -69,8 +69,9 @@ export function Landingpage() {
             <h3 className="text-2xl font-bold mb-2">Balance</h3>
             <p className="text-4xl">${balance}</p>
           </div>
-          <Transaction email='x' amount='0' action='x' time='1' name='x'/>
         </div>
+        <Transaction email='x' amount='0' action='x' time='1' name='x'/>
+
       </div>
       </div>
       }

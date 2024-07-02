@@ -14,6 +14,7 @@ app.use(cors({
 app.post('/login',Login ,(req,res)=>{})
 app.post('/signUp',Signup,(req,res)=>{})
 app.post('/sendMoney',sendMoney,(req,res)=>{})
+app.post('/getTransactions',(req,res)=>{})
 app.listen (3000,async()=>{
     connectDb()
     console.log("on port 3000")

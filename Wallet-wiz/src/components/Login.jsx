@@ -17,7 +17,7 @@ export  function Login() {
       if(res.status==200){
         await dispatch(setStatus({email:email,password:password,name:res.data.name,loggedIn:true}))
         navigate('../landingPage')
-    }
+      }
     } catch (error) {
       console.log(error)
     }

@@ -5,8 +5,7 @@ const TransactionSchema=new mongoose.Schema(
             type:String,
             required:true
         },
-        transactions:[
-            {
+        transactionDetail:{
                 action:{
                     type:String,
                     required:true
@@ -15,20 +14,19 @@ const TransactionSchema=new mongoose.Schema(
                     type:String,
                     required:true
                 },
-                date:{
-                    type:Date,
-                    default:Date.now
-                },
                 amount:{
                     type:Number,
                     required:true
                 },
-                from:{
+                person:{
                     type:String,
                     required:true
                 }
-            }
-        ]
+            },
+        date:{
+            type:Date,
+            default:Date.now
+        }
     }
 )
 const transactionModel=mongoose.model('Transactions',TransactionSchema)

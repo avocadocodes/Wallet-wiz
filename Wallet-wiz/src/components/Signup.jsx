@@ -12,7 +12,6 @@ export function Signup(){
   const navigate=useNavigate()
   const handleSubmit = async(e) => {
     e.preventDefault();
-
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
 
