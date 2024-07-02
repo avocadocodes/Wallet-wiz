@@ -26,21 +26,21 @@ export function Landingpage() {
       ) : (
         <div className="">
           <SideBar />
-          <div className='flex flex-col '>
-            <div className='flex flex-row flex-wrap'>
-              <div className='text-2xl font-bold p-5'>
-                Balance
-              </div>
-              <div className='text-2xl font-bold p-5'>
-                Balance
-              </div>
-              <div className='text-2xl font-bold p-5'>
-                Balance
-              </div>
-              <div className='text-2xl font-bold p-5'>
-                Balance
-              </div>
+          <div className='flex flex-grow flex-col '>
+          
+          <div className="  p-10 bg-white flex justify-between item">
+            <div className="bg-gray-200 p-10 rounded-lg shadow-lg text-4xl font-bold flex-1 text-center mx-4">
+              <div className="p-10">Balance</div>
             </div>
+            <div className="bg-gray-200 p-10 rounded-lg shadow-lg text-4xl font-bold flex-1 text-center mx-4">
+            <div className='p-10'>Money Sent</div>
+            </div>
+            <div>
+              <button  className="bg-gray-500 text-white py-4 px-6 rounded-md shadow-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-xl justify-center items-center">Requests Received</button>
+            </div>
+          </div>
+
+
             <Transaction email="x" amount="0" action="x" time="1" name="x" />
           </div>
         </div>
