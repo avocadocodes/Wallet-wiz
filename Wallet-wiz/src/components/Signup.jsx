@@ -1,19 +1,22 @@
-import  { useState } from 'react';
-import axios from 'axios'
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 import { setStatus } from '../Store/userDataSlice';
-import {Link, useNavigate} from 'react-router-dom'
-import { useSelector } from 'react-redux';
-export function Signup(){
+import { useNavigate } from 'react-router-dom';
+import signUpImage from './login.jpg';
+
+export function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const dispatch =useDispatch()
-  const navigate=useNavigate()
-  const userStatus = useSelector(state =>state.userStatus)
-  const handleSubmit = async(e) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userStatus = useSelector(state => state.userStatus);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
 
@@ -36,73 +39,85 @@ export function Signup(){
       alert('Passwords do not match');
       return;
     }
+
     try {
-      const res=await axios.post('http://localhost:3000/signUp',{email:email,password:password,name:name})
-      if(res.status==200){
-        await dispatch(setStatus({email:email,password:password,name:name,loggedIn:true}))
-        console.log(userStatus.userStatus.loggedIn);
-        navigate('../landingPage')
-    }
+      const res = await axios.post('http://localhost:3000/signUp', { email: email, password: password, name: name });
+      if (res.status === 200) {
+        await dispatch(setStatus({ email: email, password: password, name: name, loggedIn: true }));
+        navigate('../landingPage');
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
   return (
-    <div  className="flex justify-center items-center h-screen bg-gray-100">
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-full max-w-sm">
-        <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
-        <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700">Name</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            placeholder="Enter your name"
-            className="w-full px-3 py-2 border border-gray-300 rounded"
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="bg-[#b09cd3] rounded-2xl flex max-w-3xl p-5 items-center">
+        <div className="md:w-1/2 px-8">
+          <h2 className="font-bold text-3xl text-[#3f205d]">Sign Up</h2>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <div className="mb-4">
+              <label htmlFor="name" className="block text-[#3f205d]">Name</label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                placeholder="Enter your name"
+                className="w-full px-3 py-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-[#3f205d]">Email</label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="Enter your email"
+                className="w-full px-3 py-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="password" className="block text-[#3f205d]">Password</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder="Enter your password"
+                className="w-full px-3 py-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="confirmPassword" className="block text-[#3f205d]">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                placeholder="Confirm your password"
+                className="w-full px-3 py-2 border border-gray-300 rounded"
+              />
+            </div>
+            <button className="bg-[#3f205d] text-white py-2 rounded-xl hover:scale-105 duration-300 hover:bg-[#ca73d4] font-medium" type="submit">
+              Sign Up
+            </button>
+          </form>
+        </div>
+        <div className="md:block hidden w-1/2">
+          <img
+            className="rounded-2xl max-h-[1600px]"
+            src = {signUpImage}
+            alt="signup form image"
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder="Enter your email"
-            className="w-full px-3 py-2 border border-gray-300 rounded"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-gray-700">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder="Enter your password"
-            className="w-full px-3 py-2 border border-gray-300 rounded"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="confirmPassword" className="block text-gray-700">Confirm Password</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-            placeholder="Confirm your password"
-            className="w-full px-3 py-2 border border-gray-300 rounded"
-          />
-        </div>
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">Sign Up</button>
-        
-      </form>
+      </div>
     </div>
   );
 }
