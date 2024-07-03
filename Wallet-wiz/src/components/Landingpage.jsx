@@ -7,6 +7,7 @@ import axios from 'axios';
 import Profile from './Profile';
 import Transaction from './Transaction';
 import { sendMoney } from '../Store/userDataSlice';
+import TopBar from './TopBar';
 export function Landingpage() {
   const [transactions, setTransactions] = useState([]);
   const [showRequestModal, setShowRequestModal] = useState(false);
@@ -45,6 +46,10 @@ export function Landingpage() {
     try {
       const email = formData.get('email');
       const amount = formData.get('amount');
+      if(amount>userStatus.userStatus.balance){
+        alert("you don't have enough balane")
+        return 
+      }
       console.log(userStatus.userStatus.email);
       const res = await axios.post('http://localhost:3000/sendMoney', {
         senderEmail: userStatus.userStatus.email,
@@ -54,21 +59,14 @@ export function Landingpage() {
       console.log(res);
       if(res.status==200){
         const {moneyReceived,moneySent,balance}=res.data
-        dispatch(sendMoney(moneyReceived,moneySent,balance))
+        await dispatch(sendMoney({balance:balance,moneyReceived:moneyReceived,moneySent:moneySent}))
+
       }
     } catch (error) {
       console.error(error);
     }
   };
-  const getRequests = async () => {
-    try {
-      console.log(userStatus.userStatus.email);
-      const res = await axios.post('http://localhost:3000/getRequests', { email: userStatus.userStatus.email });
-      console.log(res.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
 
   useEffect(() => {
     if (!userStatus.userStatus.loggedIn) {
@@ -82,31 +80,8 @@ export function Landingpage() {
       <SideBar onRequest={handleShowRequestModal} onSend={handleShowSendModal} />
       <div className='flex flex-col w-full border border-gray-500 mx-10'>
         <Profile/>
-        <div className='flex flex-row justify-evenly p-10 space-x-4'>
-          <div className='flex flex-col border-2 border-gray-500 rounded-lg p-10 flex-1 justify-between'>
-            <div className='text-3xl font-bold '>
-              Balance
-            </div>
-            <div className='text-2xl font-bold '>
-              Rs {userStatus.userStatus.balance}
-            </div>
-          </div>
-          <div className='flex flex-col border-2 border-gray-500 rounded-lg p-10 flex-1 justify-between'>
-            <div className='text-3xl font-bold'>
-              Money Sent
-            </div>
-            <div className='text-2xl font-bold'>
-              Rs {userStatus.userStatus.balance}
-            </div>
-          </div>
-          <button onClick={getRequests} className='flex flex-col border-2 border-gray-500 rounded-lg p-10 flex-1 justify-between'>
-            <div className='text-3xl font-bold'>
-              Requests Received
-            </div>
-          </button>
-        </div>
+        <TopBar/>
         <Transaction/>
-        
       </div>
       <Modal show={showRequestModal} onClose={handleCloseModal} modalContent="Request Money" onSubmit={handleRequestSubmit} />
       <Modal show={showSendModal} onClose={handleCloseModal} modalContent="Send Money" onSubmit={handleSendSubmit} />

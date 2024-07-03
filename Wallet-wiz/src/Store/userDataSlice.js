@@ -5,7 +5,7 @@ const initialState ={
         name:'',
         email:'',
         password:0,
-        balance:0,
+        balance:10000,
         moneySent:0,
         moneyReceived:0
     }

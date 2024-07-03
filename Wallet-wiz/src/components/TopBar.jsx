@@ -12,6 +12,15 @@ function TopBar() {
         setMoneyReceived(userStatus.userStatus.moneyReceived)
         setMoneySent(userStatus.userStatus.moneySent)
     },[userStatus.userStatus.balance,userStatus.userStatus.moneyReceived,userStatus.userStatus.moneySent])
+    const getRequests = async () => {
+        try {
+          console.log(userStatus.userStatus.email);
+          const res = await axios.post('http://localhost:3000/getRequests', { email: userStatus.userStatus.email });
+          console.log(res.data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
   return (
     <div className='flex flex-row justify-evenly p-10 space-x-4'>
           <div className='flex flex-col border-2 border-gray-500 rounded-lg p-10 flex-1 justify-between'>

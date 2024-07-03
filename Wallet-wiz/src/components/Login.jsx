@@ -4,6 +4,7 @@ import { setStatus } from '../Store/userDataSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import loginImage from './login.jpg';
+import { sendMoney } from '../Store/userDataSlice';
 
 
 export function Login() {
@@ -18,7 +19,9 @@ export function Login() {
     try {
       const res = await axios.post('http://localhost:3000/login', { email: email, password: password });
       if (res.status === 200) {
+        const {balance ,moneyReceived,moneySent} =res.data
         await dispatch(setStatus({ email: email, password: password, name: res.data.name, loggedIn: true }));
+        await dispatch(sendMoney({balance:balance,moneyReceived:moneyReceived,moneySent:moneySent}))
         navigate('../landingPage');
       }
     } catch (error) {
