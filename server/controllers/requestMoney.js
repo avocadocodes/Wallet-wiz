@@ -2,7 +2,9 @@ import requestReceivedModel from "../models/requestReceived.js";
 import requestSentModel from "../models/requestSent.js";
 import userModel from "../models/userSchema.js";
 import { v4 as uuidv4 } from 'uuid';
-
+import dotenv from 'dotenv'
+import { generateEmail } from "../generateEmail.js";
+dotenv.config()
 export async function requestMoney(req,res,next){
     let sender,receiver;
     const {senderEmail,receiverEmail,amount}=req.body
@@ -30,6 +32,8 @@ export async function requestMoney(req,res,next){
             amount: amount,
             person: sender.name 
         }}).then((res)=>{console.log(res)})
+        generateEmail(receiver.name,receiverEmail,amount,sender.name)
+        
         res.status(200).json({message:'request completed',requestSentId:requestId})
     }
     catch (error) {

@@ -19,10 +19,16 @@ const userSchema=new mongoose.Schema(
             required:true
         },
         balance:{
-            type:Number
+            type:Number,
+            default:10000
         },
         moneyRecieved:{
-            type:Number
+            type:Number,
+            default:0
+        },
+        moneySent:{
+            type:Number,
+            default:0
         }
     }
 )

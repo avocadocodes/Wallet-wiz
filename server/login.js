@@ -5,7 +5,7 @@ export async function Login(req,res,next){
         const user=await userModel.findOne({email:email,password:password})
         if(user){
             console.log(user.accountId)
-            res.status(200).json({name:user.name})
+            res.status(200).json({name:user.name,balance:user.balance,moneyReceived:user.moneyRecieved,moneySent:user.moneySent})
         }
         else {
             console.log('not found')

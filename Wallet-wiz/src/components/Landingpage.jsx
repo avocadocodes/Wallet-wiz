@@ -1,50 +1,115 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SideBar from './SideBar';
+import Modal from './Modal';
+import { useNavigate } from 'react-router-dom';
+import { useSelector,useDispatch } from 'react-redux';
+import axios from 'axios';
+import Profile from './Profile';
 import Transaction from './Transaction';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-
+import { sendMoney } from '../Store/userDataSlice';
 export function Landingpage() {
   const [transactions, setTransactions] = useState([]);
+  const [showRequestModal, setShowRequestModal] = useState(false);
+  const [showSendModal, setShowSendModal] = useState(false);
   const userStatus = useSelector((state) => state.userStatus);
-  const [newTransaction, setNewTransaction] = useState({
-    user: '',
-    amount: 0,
-    action: '',
-  });
+  const navigate = useNavigate();
+  const dispatch =useDispatch()
+  const handleShowRequestModal = () => {
+    setShowRequestModal(true);
+  };
+
+  const handleShowSendModal = () => {
+    setShowSendModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowRequestModal(false);
+    setShowSendModal(false);
+  };
+
+  const handleRequestSubmit = async (formData) => {
+    try {
+      const email = formData.get('email');
+      const amount = formData.get('amount');
+      console.log(userStatus.userStatus.email);
+      const res = await axios.post('http://localhost:3000/requestMoney', {
+        senderEmail: userStatus.userStatus.email,
+        receiverEmail: email,
+        amount:  parseInt(amount, 10)
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const handleSendSubmit = async (formData) => {
+    try {
+      const email = formData.get('email');
+      const amount = formData.get('amount');
+      console.log(userStatus.userStatus.email);
+      const res = await axios.post('http://localhost:3000/sendMoney', {
+        senderEmail: userStatus.userStatus.email,
+        receiverEmail: email,
+        amount:  parseInt(amount, 10)
+      });
+      console.log(res);
+      if(res.status==200){
+        const {moneyReceived,moneySent,balance}=res.data
+        dispatch(sendMoney(moneyReceived,moneySent,balance))
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const getRequests = async () => {
+    try {
+      console.log(userStatus.userStatus.email);
+      const res = await axios.post('http://localhost:3000/getRequests', { email: userStatus.userStatus.email });
+      console.log(res.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (!userStatus.userStatus.loggedIn) {
+      alert('You have been logged out. Please login again.');
+      navigate('/');
+    }
+  }, [userStatus.userStatus.loggedIn, navigate]);
 
   return (
-    <div className="flex h-screen flex-col">
-      {!userStatus.userStatus.loggedIn ? (
-        <div className="flex justify-center items-center h-full w-full">
-          <Link to="/">
-            <button className="w-full bg-blue-500 text-white py-4 px-6 rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-xl">
-              LOGIN TO ENTER
-            </button>
-          </Link>
-        </div>
-      ) : (
-        <div className="">
-          <SideBar />
-          <div className='flex flex-grow flex-col '>
-          
-          <div className="  p-10 bg-white flex justify-between item">
-            <div className="bg-gray-200 p-10 rounded-lg shadow-lg text-4xl font-bold flex-1 text-center mx-4">
-              <div className="p-10">Balance</div>
+    <div className="flex flex-row justify-between w-full p-5 h-screen">
+      <SideBar onRequest={handleShowRequestModal} onSend={handleShowSendModal} />
+      <div className='flex flex-col w-full border border-gray-500 mx-10'>
+        <Profile/>
+        <div className='flex flex-row justify-evenly p-10 space-x-4'>
+          <div className='flex flex-col border-2 border-gray-500 rounded-lg p-10 flex-1 justify-between'>
+            <div className='text-3xl font-bold '>
+              Balance
             </div>
-            <div className="bg-gray-200 p-10 rounded-lg shadow-lg text-4xl font-bold flex-1 text-center mx-4">
-            <div className='p-10'>Money Sent</div>
-            </div>
-            <div>
-              <button  className="bg-gray-500 text-white py-4 px-6 rounded-md shadow-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-xl justify-center items-center">Requests Received</button>
+            <div className='text-2xl font-bold '>
+              Rs {userStatus.userStatus.balance}
             </div>
           </div>
-
-
-            <Transaction email="x" amount="0" action="x" time="1" name="x" />
+          <div className='flex flex-col border-2 border-gray-500 rounded-lg p-10 flex-1 justify-between'>
+            <div className='text-3xl font-bold'>
+              Money Sent
+            </div>
+            <div className='text-2xl font-bold'>
+              Rs {userStatus.userStatus.balance}
+            </div>
           </div>
+          <button onClick={getRequests} className='flex flex-col border-2 border-gray-500 rounded-lg p-10 flex-1 justify-between'>
+            <div className='text-3xl font-bold'>
+              Requests Received
+            </div>
+          </button>
         </div>
-      )}
+        <Transaction/>
+        
+      </div>
+      <Modal show={showRequestModal} onClose={handleCloseModal} modalContent="Request Money" onSubmit={handleRequestSubmit} />
+      <Modal show={showSendModal} onClose={handleCloseModal} modalContent="Send Money" onSubmit={handleSendSubmit} />
     </div>
   );
 }
