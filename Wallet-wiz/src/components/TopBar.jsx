@@ -23,7 +23,7 @@ function TopBar() {
       };
   return (
     <div className='flex flex-row justify-evenly p-10 space-x-4'>
-          <div className='flex flex-col border-2 border-gray-500 rounded-lg p-10 flex-1 justify-between'>
+          <div className='flex flex-col  rounded-lg p-10 flex-1 justify-between'>
             <div className='text-3xl font-bold '>
               Balance
             </div>
@@ -31,7 +31,7 @@ function TopBar() {
               Rs {balance}
             </div>
           </div>
-          <div className='flex flex-col border-2 border-gray-500 rounded-lg p-10 flex-1 justify-between'>
+          <div className='flex flex-col  rounded-lg p-10 flex-1 justify-between'>
             <div className='text-3xl font-bold'>
               Money Sent
             </div>
@@ -39,7 +39,7 @@ function TopBar() {
               Rs {moneySent}
             </div>
           </div>
-          <div className='flex flex-col border-2 border-gray-500 rounded-lg p-10 flex-1 justify-between'>
+          <div className='flex flex-col  rounded-lg p-10 flex-1 justify-between'>
             <div className='text-3xl font-bold'>
               Money Received
             </div>
@@ -47,7 +47,7 @@ function TopBar() {
               Rs {moneyReceived}
             </div>
           </div>
-          <button onClick={getRequests} className='flex flex-col border-2 border-gray-500 rounded-lg p-10 flex-1 justify-between'>
+          <button onClick={getRequests} className='flex flex-col rounded-lg p-10 flex-1 justify-between'>
             <div className='text-3xl font-bold'>
               Requests Received
             </div>

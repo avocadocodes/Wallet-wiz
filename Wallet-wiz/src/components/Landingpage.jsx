@@ -60,7 +60,7 @@ export function Landingpage() {
       if(res.status==200){
         const {moneyReceived,moneySent,balance}=res.data
         await dispatch(sendMoney({balance:balance,moneyReceived:moneyReceived,moneySent:moneySent}))
-
+        
       }
     } catch (error) {
       console.error(error);
@@ -78,7 +78,7 @@ export function Landingpage() {
   return (
     <div className="flex flex-row justify-between w-full p-5 h-screen">
       <SideBar onRequest={handleShowRequestModal} onSend={handleShowSendModal} />
-      <div className='flex flex-col w-full border border-gray-500 mx-10'>
+      <div className='flex flex-col w-full  mx-10'>
         <Profile/>
         <TopBar/>
         <Transaction/>
