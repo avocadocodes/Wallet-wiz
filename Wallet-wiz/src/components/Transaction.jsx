@@ -32,16 +32,13 @@ function Transaction() {
   };
   return (
     <div>
-    <div className='flex flex-row justify-evenly'>
-      <div className='text-3xl font-bold text-neutral-600'>
+    <div className='flex flex-row justify-evenly space-y-9 items-center'>
+      <div className='text-3xl font-bold bg- text-neutral-600 '>
         Your Transactions
       </div>
       <div className='flex flex-row justify-between'>
-        <div className='text-2xl font-bold text-slate-800'>
+        <button  className = "bg-[#b09cd3] rounded-3xl px-4 py-4 font-semibold"onClick={getTransactions}>
           Refresh
-        </div>
-        <button onClick={getTransactions}>
-          Icon
         </button>
       </div>
     </div>
@@ -65,16 +62,7 @@ function Transaction() {
     </div>
   ))}
 </div>
-
-
-
-
-
-
-
-
-
-  </div>
+</div>
   )
 }
 
