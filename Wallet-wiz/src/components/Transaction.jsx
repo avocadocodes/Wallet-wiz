@@ -38,7 +38,7 @@ function Transaction() {
       </div>
       <div className='flex flex-row justify-between'>
         <button  className = "bg-[#b09cd3] rounded-3xl px-4 py-4 font-semibold"onClick={getTransactions}>
-          Refresh
+          REFRESH
         </button>
       </div>
     </div>
