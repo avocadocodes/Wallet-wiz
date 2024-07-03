@@ -34,6 +34,7 @@ export function Login() {
       <div className="bg-[#b09cd3] rounded-2xl flex max-w-3xl p-5 items-center">
         <div className="md:w-1/2 px-8">
           <h2 className="font-bold text-3xl text-[#3f205d]">Login</h2>
+          
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <input 
               className="p-2 mt-8 rounded-xl border" 
