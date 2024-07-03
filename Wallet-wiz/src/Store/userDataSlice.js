@@ -6,7 +6,8 @@ const initialState ={
         email:'',
         password:0,
         balance:0,
-        moneyRecieved:0
+        moneySent:0,
+        moneyReceived:0
     }
 }
 export const userStatusSlice= createSlice({
@@ -19,14 +20,12 @@ export const userStatusSlice= createSlice({
             state.userStatus.password=action.payload.password
             state.userStatus.loggedIn=action.payload.loggedIn
         },
-        increaseBalance:(state,action)=>{
-            state.balance=state.balance+action.payload.amount
-            state.moneyRecieved=state.moneyRecieved+action.payload.amount
-        },
-        decreaseBalance:(state,action)=>{
-            state.balance=state.balance-action.payload.amount
+        sendMoney:(state,action)=>{
+            state.userStatus.balance=action.payload.balance
+            state.userStatus.moneyReceived=action.payload.moneyReceived
+            state.userStatus.moneySent=action.payload.moneySent
         }
     }
 })
 export default userStatusSlice.reducer
-export const {setStatus,increaseBalance,decreaseBalance} = userStatusSlice.actions
+export const {setStatus,sendMoney} = userStatusSlice.actions
