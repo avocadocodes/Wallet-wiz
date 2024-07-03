@@ -3,7 +3,7 @@ import React from 'react';
 
 const SideBar = ({ onRequest, onSend }) => {
   return (
-    <div className='flex flex-col bg-[#b09cd3] p-6 items-center text-2xl font-bold'>
+    <div className='flex flex-col bg-[#b09cd3] p-6 rounded-xl items-center text-2xl font-bold'>
       <div className='p-10'>
         Logo
       </div>

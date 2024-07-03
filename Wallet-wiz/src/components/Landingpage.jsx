@@ -8,7 +8,8 @@ import Profile from './Profile';
 import Transaction from './Transaction';
 import { sendMoney } from '../Store/userDataSlice';
 import TopBar from './TopBar';
-
+import Chart from './Chart';
+import Requests from './Requests';
 export function Landingpage() {
   const [transactions, setTransactions] = useState([]);
   const [showRequestModal, setShowRequestModal] = useState(false);
@@ -79,10 +80,14 @@ export function Landingpage() {
   return (
     <div className="flex flex-row justify-between w-full p-5 h-screen">
       <SideBar onRequest={handleShowRequestModal} onSend={handleShowSendModal} />
-      <div className='flex flex-col w-full mx-10'>
-        <Profile />
-        <TopBar />
-        <Transaction />
+      <div className='flex flex-col w-full  mx-10'>
+        <Profile/>
+        <TopBar/>
+        <div className='flex flex-row'>
+          <Chart/>
+          <Requests/>
+        </div>
+        <Transaction/>
       </div>
       <Modal show={showRequestModal} onClose={handleCloseModal} modalContent="Request Money" onSubmit={handleRequestSubmit} />
       <Modal show={showSendModal} onClose={handleCloseModal} modalContent="Send Money" onSubmit={handleSendSubmit} />
