@@ -47,11 +47,6 @@ function TopBar() {
               Rs {moneyReceived}
             </div>
           </div>
-          <button onClick={getRequests} className='flex flex-col rounded-lg p-10 flex-1 justify-between'>
-            <div className='text-3xl font-bold'>
-              Requests Received
-            </div>
-          </button>
         </div>
   )
 }
