@@ -80,10 +80,10 @@ export function Landingpage() {
   return (
     <div className="flex flex-row justify-between w-full p-5 h-screen">
       <SideBar onRequest={handleShowRequestModal} onSend={handleShowSendModal} />
-      <div className='flex flex-col w-full border border-gray-500 mx-10'>
+      <div className='flex flex-col w-full  mx-10'>
         <Profile/>
         <div className='flex flex-row justify-evenly p-10 space-x-4'>
-          <div className='flex flex-col border-2 border-gray-500 rounded-lg p-10 flex-1 justify-between'>
+          <div className='flex flex-col  rounded-lg p-10 bg-[#b09cd3] flex-1 justify-between'>
             <div className='text-3xl font-bold '>
               Balance
             </div>
@@ -91,7 +91,7 @@ export function Landingpage() {
               Rs {userStatus.userStatus.balance}
             </div>
           </div>
-          <div className='flex flex-col border-2 border-gray-500 rounded-lg p-10 flex-1 justify-between'>
+          <div className='flex flex-col rounded-lg p-10 bg-[#b09cd3] flex-1 justify-between'>
             <div className='text-3xl font-bold'>
               Money Sent
             </div>
@@ -99,7 +99,7 @@ export function Landingpage() {
               Rs {userStatus.userStatus.balance}
             </div>
           </div>
-          <button onClick={getRequests} className='flex flex-col border-2 border-gray-500 rounded-lg p-10 flex-1 justify-between'>
+          <button onClick={getRequests} className='flex flex-col  rounded-lg p-10 bg-[#b09cd3] flex-1 justify-between'>
             <div className='text-3xl font-bold'>
               Requests Received
             </div>

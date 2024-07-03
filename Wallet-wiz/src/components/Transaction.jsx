@@ -49,11 +49,11 @@ function Transaction() {
   {transactions.map((transaction, key) => (
     <div className='flex flex-row justify-between items-center border-b border-gray-200 py-4' key={key}>
       <div className='flex flex-col'>
-        <div className='text-lg font-bold'>Transaction ID: {transaction.transactionId}</div>
+        <div className='text-lg font-bold bg-[#b09cd3] rounded-2xl py-4 px-4'>Transaction ID: {transaction.transactionId}</div>
         <div className='text-sm text-gray-600'>Date: {formatDate(transaction.date)}</div>
       </div>
       <div className='flex flex-col'>
-        <div className='text-lg font-bold text-blue-600'>Action: {transaction.transactionDetail.action}</div>
+        <div className='text-lg font-bold text-black'>Action: {transaction.transactionDetail.action}</div>
       </div>
       <div className='flex flex-col'>
         <div className='text-lg font-bold'>Email: {transaction.transactionDetail.email}</div>
