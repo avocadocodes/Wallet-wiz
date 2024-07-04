@@ -37,7 +37,9 @@ function Requests() {
         {requests.map((request, key) => (
           <div className='flex flex-row justify-between items-center border-b border-gray-200 py-4' key={key}>
             <div className='flex flex-col'>
-              </div>
+              {/* <div className='text-lg font-bold bg-[#b09cd3] rounded-2xl py-4 px-4'>RequestId ID: {request.requestReceivedId}</div>
+              <div className='text-sm text-gray-600'>Date: {formatDate(request.date)}</div> */}
+            </div>
             <div className='flex flex-col'>
               <div className='text-lg font-bold'>From: {request.requestReceivedDetail.email}</div>
             </div>
