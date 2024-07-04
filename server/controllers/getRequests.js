@@ -10,7 +10,7 @@ export async function getRequests(req, res, next) {
 
     if (user && user.accountId) {
       // Find requests received by accountId
-      const list = await requestReceivedModel.find({ accountId: user.accountId }).sort({ date: -1 }).limit(10);
+      const list = await requestReceivedModel.find({ accountId: user.accountId }).sort({ date: -1 }).limit(4);
       console.log(list);
 
       // Ensure no circular references

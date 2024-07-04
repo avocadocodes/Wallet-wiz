@@ -18,9 +18,9 @@ const COLORS = ['#b09cd3', '#3f205d']
 
 const Chart = ({ title, height }) => {
   return (
-    <div className='chart flex-1'>
+    <div className='chart flex-1 '>
       <div className='title'>{title}</div>
-      <ResponsiveContainer width='100%' height={height || 300}>
+      <ResponsiveContainer height={height || 300}>
         <PieChart>
           <Pie
             data={data}
