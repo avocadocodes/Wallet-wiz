@@ -2,7 +2,7 @@ import requestReceivedModel from "../models/requestReceived.js";
 import requestSentModel from "../models/requestSent.js";
 import userModel from "../models/userSchema.js";
 import transactionModel from "../models/transactions.js";
-export async function answerRequest(req,res,next){
+export async function acceptRequest(req,res,next){
     let sender,receiver
     const {requestId,senderEmail,receiverEmail,amount}=req.body
     try {
@@ -15,13 +15,13 @@ export async function answerRequest(req,res,next){
         res.status(400)
     }
     try {
-        await requestReceivedModel.deleteOne({accountId:sender.accountId,requestReceivedId:requestId})
+        console.log(await requestReceivedModel.deleteOne({accountId:sender.accountId,requestReceivedId:requestId}))
     } catch (error) {
         console.log(error)
         res.status(400)
     }
     try {
-        await requestSentModel.deleteOne({accountId:receiver.accountId,requestSentId:requestId})
+        console.log(await requestSentModel.deleteOne({accountId:receiver.accountId,requestSentId:requestId}))
     } catch (error) {
         console.log(error)
         res.status(400)
