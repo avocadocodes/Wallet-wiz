@@ -1,5 +1,6 @@
 import './Chart.scss'
-import React from 'react'
+import React, { useEffect ,useState} from 'react'
+import { useSelector } from 'react-redux'
 import {
   PieChart,
   Pie,
@@ -9,14 +10,21 @@ import {
   Legend
 } from 'recharts'
 
-const data = [
-  { name: 'Money Received', value: 400 },
-  { name: 'Money Sent', value: 300 },
-]
-
 const COLORS = ['#b09cd3', '#3f205d']
 
 const Chart = ({ title, height }) => {
+  const userStatus=useSelector(state=>state.userStatus)
+  const [moneyReceived,setMoneyReceived]=useState(0)
+  const [moneySent,setMoneySent]=useState(0)
+  useEffect(()=>{
+      setMoneyReceived(userStatus.userStatus.moneyReceived)
+      setMoneySent(userStatus.userStatus.moneySent)
+  },[userStatus.userStatus.balance,userStatus.userStatus.moneyReceived])
+
+const data = [
+  { name: 'Money Received', value: moneyReceived},
+  { name: 'Money Sent', value: moneySent },
+]
   return (
     <div className='chart w-1/3 '>
       <div className='title'>{title}</div>
