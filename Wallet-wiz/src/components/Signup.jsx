@@ -46,8 +46,10 @@ export function Signup() {
         await dispatch(setStatus({ email: email, password: password, name: name, loggedIn: true }));
         navigate('../landingPage');
       }
+      else alert('try a different email')
     } catch (error) {
       console.log(error);
+      alert('try a different email')
     }
   };
 

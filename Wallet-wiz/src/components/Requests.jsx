@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { sendMoney } from '../Store/userDataSlice';
-import { FaMoneyBillAlt } from 'react-icons/fa';
+import { IoReload } from "react-icons/io5";
 
 function Requests() {
   const userStatus = useSelector((state) => state.userStatus);
@@ -35,6 +35,10 @@ function Requests() {
   };
 
   const acceptRequest = async (receiverEmail, amount, requestId) => {
+    if(amount>userStatus.userStatus.amount){
+      alert("you don't have enough balance")
+      return ;
+    }
     try {
       console.log(userStatus.userStatus.email);
       const res = await axios.post('http://localhost:3000/acceptRequest', { senderEmail: userStatus.userStatus.email, receiverEmail, amount: parseInt(amount, 10), requestId });
@@ -65,41 +69,47 @@ function Requests() {
   }, []);
 
   return (
-    <div className='flex flex-col rounded-lg p-10 justify-between w-2/3'>
-      <div className='flex justify-between items-center mb-5'>
-        <div className='font-semibold text-2xl'>
+    <div className='flex flex-col rounded-lg p-10 justify-between w-2/3 border-2 mx-3'>
+      <div className='flex justify-evenly items-center mb-5'>
+        <div className='font-bold text-3xl'>
           Requests Received
         </div>
         <button onClick={getRequests} className='text-3xl font-bold flex items-center'>
-          <FaMoneyBillAlt className='ml-2' />
+          <IoReload />
         </button>
       </div>
 
-      <div className='flex flex-col py-5 px-5 overflow-y-auto max-h-96'>
-        {requests.map((request, key) => (
-          <div className='flex flex-row justify-between items-center border-b border-gray-200 py-4' key={key}>
-            <div className='flex flex-col'>
-              {/* <div className='text-lg font-bold bg-[#b09cd3] rounded-2xl py-4 px-4'>RequestId ID: {request.requestReceivedId}</div>
-              <div className='text-sm text-gray-600'>Date: {formatDate(request.date)}</div> */}
+      {requests.length === 0 ? (
+        <div className='flex justify-center items-center py-5'>
+          <div className='text-2xl text-gray-500 py-10'>No requests</div>
+        </div>
+      ) : (
+        <div className='flex flex-col py-5 px-5 overflow-y-auto max-h-96 '>
+          {requests.map((request, key) => (
+            <div className='flex flex-row justify-between items-center border-b border-gray-200 py-4' key={key}>
+              <div className='flex flex-col'>
+                {/* <div className='text-lg font-bold bg-[#b09cd3] rounded-2xl py-4 px-4'>RequestId ID: {request.requestReceivedId}</div>
+                <div className='text-sm text-gray-600'>Date: {formatDate(request.date)}</div> */}
+              </div>
+              <div className='flex flex-col'>
+                <div className='text-lg font-bold'>From: {request.requestReceivedDetail.email}</div>
+              </div>
+              <div className='flex flex-col'>
+                <div className='text-lg font-bold text-gray-800'>Amount: Rs {request.requestReceivedDetail.amount}</div>
+                <div className='ml-4 text-sm text-gray-600'>Name: {request.requestReceivedDetail.person}</div>
+              </div>
+              <div className='flex flex-row space-x-4'>
+                <button onClick={() => acceptRequest(request.requestReceivedDetail.email, request.requestReceivedDetail.amount, request.requestReceivedId)} className='bg-green-600 text-white px-2 py-2 rounded-xl'>
+                  Accept
+                </button>
+                <button onClick={() => declineRequest(request.requestReceivedDetail.email, request.requestReceivedId)} className='bg-red-600 text-white px-2 py-2 rounded-xl'>
+                  Decline
+                </button>
+              </div>
             </div>
-            <div className='flex flex-col'>
-              <div className='text-lg font-bold'>From: {request.requestReceivedDetail.email}</div>
-            </div>
-            <div className='flex flex-col'>
-              <div className='text-lg font-bold text-gray-800'>Amount: Rs {request.requestReceivedDetail.amount}</div>
-              <div className='ml-4 text-sm text-gray-600'>Name: {request.requestReceivedDetail.person}</div>
-            </div>
-            <div className='flex flex-row space-x-4'>
-              <button onClick={() => acceptRequest(request.requestReceivedDetail.email, request.requestReceivedDetail.amount, request.requestReceivedId)} className='bg-green-600 text-white px-2 py-2 rounded-xl'>
-                Accept
-              </button>
-              <button onClick={() => declineRequest(request.requestReceivedDetail.email, request.requestReceivedId)} className='bg-red-600 text-white px-2 py-2 rounded-xl'>
-                Decline
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

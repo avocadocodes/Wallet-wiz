@@ -43,6 +43,10 @@ export function Landingpage() {
         alert("you can't request more than Rs 100000")
         return
       }
+      if(email===userStatus.userStatus.email){
+        alert('you cannot request money from yourself')
+        return ;
+      }
       console.log(userStatus.userStatus.email);
       const res = await axios.post('http://localhost:3000/requestMoney', {
         senderEmail: userStatus.userStatus.email,
@@ -65,6 +69,10 @@ export function Landingpage() {
       if (amount > userStatus.userStatus.balance) {
         alert("You don't have enough balance");
         return;
+      }
+      if(email===userStatus.userStatus.email){
+        alert('you cannot send money to yourself')
+        return ;
       }
       console.log(userStatus.userStatus.email);
       const res = await axios.post('http://localhost:3000/sendMoney', {

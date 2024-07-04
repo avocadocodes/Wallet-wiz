@@ -24,8 +24,10 @@ export function Login() {
         await dispatch(sendMoney({balance:balance,moneyReceived:moneyReceived,moneySent:moneySent}))
         navigate('../landingPage');
       }
+      else alert('wrong email or password')
     } catch (error) {
       console.log(error);
+      alert('wrong email or password')
     }
   };
 
