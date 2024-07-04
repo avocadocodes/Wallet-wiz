@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import axios from 'axios';
-
+import { sendMoney } from '../Store/userDataSlice';
 function Transaction() {
   const [transactions, setTransactions] = useState([]);
   const userStatus = useSelector((state) => state.userStatus);
-
+  const dispatch=useDispatch()
   const getTransactions = async () => {
     try {
       const res = await axios.post('http://localhost:3000/getTransactions', { email: userStatus.userStatus.email });
+      const {balance ,moneySent,moneyReceived}= res.data
+      dispatch(sendMoney({balance:balance,moneyReceived:moneyReceived,moneySent:moneySent}))
       setTransactions(res.data.list);
     } catch (error) {
       console.error(error);

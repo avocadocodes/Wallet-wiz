@@ -23,7 +23,7 @@ export async function sendMoney(req,res,next){
             person: receiver.name 
         }}).then((res)=>{console.log(res)})
         await transactionModel.create({accountId:receiver.accountId,transactionId:transactionId,transactionDetail:{
-            action: 'recieved',
+            action: 'received',
             email: senderEmail,
             amount: amount,
             person: sender.name 
@@ -33,12 +33,12 @@ export async function sendMoney(req,res,next){
         sender= await sender.save()
         console.log(receiver)
         receiver.balance+=amount
-        receiver.moneyRecieved+=amount
+        receiver.moneyReceived+=amount
         await receiver.save().then((res)=>console.log(res)).catch((e)=>{
             console.log(e)
             res.status(404)
         })
-        res.status(200).json({message:'transaction completed',transactionId:transactionId,balance:sender.balance,moneyReceived:sender.moneyRecieved,moneySent:sender.moneySent})
+        res.status(200).json({message:'transaction completed',transactionId:transactionId,balance:sender.balance,moneyReceived:sender.moneyReceived,moneySent:sender.moneySent})
     }
     catch (error) {
         console.log(error)

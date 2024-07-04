@@ -5,7 +5,7 @@ export async function Signup (req,res,next){
     const accountId=uuidv4();
     console.log(accountId)
     try{
-        const user =await userModel.create({name:name,email:email,password:password,accountId:accountId,balance:10000,moneyRecieved:0})
+        const user =await userModel.create({name:name,email:email,password:password,accountId:accountId,balance:10000,moneyReceived:0})
         console.log(user)
     }
     catch(e){

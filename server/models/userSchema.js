@@ -22,7 +22,7 @@ const userSchema=new mongoose.Schema(
             type:Number,
             default:10000
         },
-        moneyRecieved:{
+        moneyReceived:{
             type:Number,
             default:0
         },
