@@ -10,7 +10,7 @@ function Transaction() {
 
   const getTransactions = async () => {
     try {
-      const res = await axios.post('http://localhost:3000/getTransactions', { email: userStatus.userStatus.email });
+      const res = await axios.post('https://wallet-wiz-cqwk.onrender.com/getTransactions', { email: userStatus.userStatus.email });
       const { balance, moneySent, moneyReceived } = res.data;
       dispatch(sendMoney({ balance: balance, moneyReceived: moneyReceived, moneySent: moneySent }));
       setTransactions(res.data.list);

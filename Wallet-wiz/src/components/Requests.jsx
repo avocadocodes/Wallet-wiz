@@ -12,7 +12,7 @@ function Requests() {
   const getRequests = async () => {
     try {
       console.log(userStatus.userStatus.email);
-      const res = await axios.post('http://localhost:3000/getRequests', { email: userStatus.userStatus.email });
+      const res = await axios.post('https://wallet-wiz-cqwk.onrender.com/getRequests', { email: userStatus.userStatus.email });
       console.log(res.data.list);
       setRequests(res.data.list);
     } catch (error) {
@@ -41,7 +41,7 @@ function Requests() {
     }
     try {
       console.log(userStatus.userStatus.email);
-      const res = await axios.post('http://localhost:3000/acceptRequest', { senderEmail: userStatus.userStatus.email, receiverEmail, amount: parseInt(amount, 10), requestId });
+      const res = await axios.post('https://wallet-wiz-cqwk.onrender.com/acceptRequest', { senderEmail: userStatus.userStatus.email, receiverEmail, amount: parseInt(amount, 10), requestId });
       if (res.status === 200) {
         const { moneyReceived, moneySent, balance } = res.data;
         await dispatch(sendMoney({ balance, moneyReceived, moneySent }));
@@ -55,7 +55,7 @@ function Requests() {
   const declineRequest = async (receiverEmail, requestId) => {
     try {
       console.log(userStatus.userStatus.email);
-      const res = await axios.post('http://localhost:3000/declineRequest', { senderEmail: userStatus.userStatus.email, receiverEmail, requestId });
+      const res = await axios.post('https://wallet-wiz-cqwk.onrender.com/declineRequest', { senderEmail: userStatus.userStatus.email, receiverEmail, requestId });
       if (res.status === 200) {
         getRequests();
       }

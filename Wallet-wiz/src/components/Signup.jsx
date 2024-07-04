@@ -41,7 +41,7 @@ export function Signup() {
     }
 
     try {
-      const res = await axios.post('http://localhost:3000/signUp', { email: email, password: password, name: name });
+      const res = await axios.post('https://wallet-wiz-cqwk.onrender.com/signUp', { email: email, password: password, name: name });
       if (res.status === 200) {
         await dispatch(setStatus({ email: email, password: password, name: name, loggedIn: true }));
         navigate('../landingPage');

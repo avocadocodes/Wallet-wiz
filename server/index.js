@@ -13,7 +13,7 @@ import { declineRequest } from './controllers/declineRequest.js'
 const app=express()
 app.use(express.json());
 app.use(cors({
-    origin:'http://localhost:5173'
+    origin:'*'
 }))
 app.post('/login',Login ,(req,res)=>{})
 app.post('/signUp',Signup,(req,res)=>{})
