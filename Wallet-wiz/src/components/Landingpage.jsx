@@ -35,6 +35,14 @@ export function Landingpage() {
     try {
       const email = formData.get('email');
       const amount = formData.get('amount');
+      if(amount<=0){
+        alert("not valid money")
+        return
+      }
+      if(amount>100000){
+        alert("you can't request more than Rs 100000")
+        return
+      }
       console.log(userStatus.userStatus.email);
       const res = await axios.post('http://localhost:3000/requestMoney', {
         senderEmail: userStatus.userStatus.email,
@@ -50,6 +58,10 @@ export function Landingpage() {
     try {
       const email = formData.get('email');
       const amount = formData.get('amount');
+      if(amount<=0){
+        alert("not valid money")
+        return
+      }
       if (amount > userStatus.userStatus.balance) {
         alert("You don't have enough balance");
         return;
