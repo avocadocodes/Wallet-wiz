@@ -48,7 +48,7 @@ export function Landingpage() {
         return ;
       }
       console.log(userStatus.userStatus.email);
-      const res = await axios.post('https://wallet-wiz-cqwk.onrender.com/requestMoney', {
+      const res = await axios.post('https://wallet-wiz-1-31s4.onrender.com/requestMoney', {
         senderEmail: userStatus.userStatus.email,
         receiverEmail: email,
         amount: parseInt(amount, 10)
@@ -75,7 +75,7 @@ export function Landingpage() {
         return ;
       }
       console.log(userStatus.userStatus.email);
-      const res = await axios.post('https://wallet-wiz-cqwk.onrender.com/sendMoney', {
+      const res = await axios.post('https://wallet-wiz-1-31s4.onrender.com/sendMoney', {
         senderEmail: userStatus.userStatus.email,
         receiverEmail: email,
         amount: parseInt(amount, 10)

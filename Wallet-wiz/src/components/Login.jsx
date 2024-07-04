@@ -17,7 +17,7 @@ export function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://wallet-wiz-cqwk.onrender.com/login', { email: email, password: password });
+      const res = await axios.post('https://wallet-wiz-1-31s4.onrender.com/login', { email: email, password: password });
       if (res.status === 200) {
         const {balance ,moneyReceived,moneySent} =res.data
         await dispatch(setStatus({ email: email, password: password, name: res.data.name, loggedIn: true }));
