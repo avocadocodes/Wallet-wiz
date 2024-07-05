@@ -60,7 +60,7 @@ export function Login() {
               Login
             </button>
             <button className="mt-4 w-full text-center bg-[#3f205d] px-6 py-2 rounded-xl text-white" >
-              Dont have an account? <a href="/signup" className="text-white 500">Create one</a>
+              <a href="/signup" className="text-white 500"> Dont have an account? Create one</a>
             </button>
           </form>
         </div>
