@@ -13,6 +13,9 @@ export function Login() {
   const dispatch = useDispatch();
   const userStatus = useSelector(state => state.userStatus);
   const navigate = useNavigate();
+  const gotoSignUp = ()=>{
+    navigate('./signup');a
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,8 +62,8 @@ export function Login() {
             <button className="bg-[#3f205d] text-white py-2 rounded-xl hover:scale-105 duration-300 hover:bg-[#ca73d4] font-medium" type="submit">
               Login
             </button>
-            <button className="mt-4 w-full text-center bg-[#3f205d] px-6 py-2 rounded-xl text-white" >
-              <a href="/signup" className="text-white 500"> Dont have an account? Create one</a>
+            <button className="mt-4 w-full text-center bg-[#3f205d] px-6 py-2 rounded-xl text-white" onClick={gotoSignUp} >
+              Dont have an account? Create one
             </button>
           </form>
         </div>
