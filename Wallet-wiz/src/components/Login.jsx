@@ -14,7 +14,7 @@ export function Login() {
   const userStatus = useSelector(state => state.userStatus);
   const navigate = useNavigate();
   const gotoSignUp = ()=>{
-    navigate('./signup');a
+    navigate('./signup');
   }
 
   const handleSubmit = async (e) => {
