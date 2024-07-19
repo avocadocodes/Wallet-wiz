@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SideBar from './SideBar';
 import Modal from './Modal';
 import { useNavigate } from 'react-router-dom';
@@ -10,10 +10,15 @@ import { sendMoney } from '../Store/userDataSlice';
 import TopBar from './TopBar';
 import Chart from './Chart';
 import Requests from './Requests';
+import Lottie from 'lottie-react';
+import loadingAnimation from '../assets/loading.json'; 
+
 export function Landingpage() {
   const [transactions, setTransactions] = useState([]);
   const [showRequestModal, setShowRequestModal] = useState(false);
   const [showSendModal, setShowSendModal] = useState(false);
+  const [loadingRequest, setIsloadingRequest] = useState(false);
+  const [loadingSend, setIsloadingSend] = useState(false);
   const userStatus = useSelector((state) => state.userStatus);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,7 +36,9 @@ export function Landingpage() {
     setShowSendModal(false);
   };
 
+
   const handleRequestSubmit = async (formData) => {
+    
     try {
       const email = formData.get('email');
       const amount = formData.get('amount');
@@ -47,17 +54,25 @@ export function Landingpage() {
         alert('you cannot request money from yourself')
         return ;
       }
+      setIsloadingRequest(true);
       console.log(userStatus.userStatus.email);
       const res = await axios.post('https://wallet-wiz-1-31s4.onrender.com/requestMoney', {
         senderEmail: userStatus.userStatus.email,
         receiverEmail: email,
         amount: parseInt(amount, 10)
       });
-    } catch (error) {
+      if(res.status === 200)
+      {
+        setIsloadingRequest(false)
+      }
+    }
+     
+    catch (error) {
       console.error(error);
     }
   };
 
+  
   const handleSendSubmit = async (formData) => {
     try {
       const email = formData.get('email');
@@ -74,6 +89,7 @@ export function Landingpage() {
         alert('you cannot send money to yourself')
         return ;
       }
+      setIsloadingSend(true)
       console.log(userStatus.userStatus.email);
       const res = await axios.post('https://wallet-wiz-1-31s4.onrender.com/sendMoney', {
         senderEmail: userStatus.userStatus.email,
@@ -84,6 +100,7 @@ export function Landingpage() {
       if (res.status === 200) {
         const { moneyReceived, moneySent, balance } = res.data;
         await dispatch(sendMoney({ balance: balance, moneyReceived: moneyReceived, moneySent: moneySent }));
+        setIsloadingSend(false)
       }
     } catch (error) {
       console.error(error);
@@ -98,6 +115,7 @@ export function Landingpage() {
   }, [userStatus.userStatus.loggedIn, navigate]);
 
   return (
+    
     <div className="flex flex-row justify-between w-full p-5 h-screen">
       <SideBar onRequest={handleShowRequestModal} onSend={handleShowSendModal} />
       <div className='flex flex-col w-full  mx-10'>
@@ -108,9 +126,9 @@ export function Landingpage() {
           <Requests/>
         </div>
         <Transaction/>
-      </div>
-      <Modal show={showRequestModal} onClose={handleCloseModal} modalContent="Request Money" onSubmit={handleRequestSubmit} />
-      <Modal show={showSendModal} onClose={handleCloseModal} modalContent="Send Money" onSubmit={handleSendSubmit} />
+      </div>  
+      <Modal show={showRequestModal} onClose={handleCloseModal} modalContent="Request Money" onSubmit={handleRequestSubmit} isLoading ={loadingRequest} />
+      <Modal show={showSendModal} onClose={handleCloseModal} modalContent="Send Money" onSubmit={handleSendSubmit} isLoading ={loadingSend} />
     </div>
   );
 }

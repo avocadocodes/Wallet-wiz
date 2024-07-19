@@ -47,6 +47,7 @@ export function Login() {
     <div className="flex flex-col justify-center items-center h-full w-full">
         <Lottie animationData={loadingAnimation} loop={true} autoplay={true} className="w-1/4 h-1/4" />
         <p className='text-2xl'>Please wait while we log you in</p>
+        <footer>P.S: the server might take a bit of time</footer>
     </div> :
     <section className="bg-gray-100 min-h-screen flex box-border justify-center items-center">
       <div className="bg-[#b09cd3] rounded-2xl flex max-w-3xl p-5 items-center">
