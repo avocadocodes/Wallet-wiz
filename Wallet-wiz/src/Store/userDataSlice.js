@@ -24,8 +24,14 @@ export const userStatusSlice= createSlice({
             state.userStatus.balance=action.payload.balance
             state.userStatus.moneyReceived=action.payload.moneyReceived
             state.userStatus.moneySent=action.payload.moneySent
+        },
+        logout:(state, action) =>{
+            state.userStatus.loggedIn = false
+            state.userStatus.name=''
+            state.userStatus.email=''
+            state.userStatus.password=0
         }
     }
 })
 export default userStatusSlice.reducer
-export const {setStatus,sendMoney} = userStatusSlice.actions
+export const {setStatus,sendMoney, logout} = userStatusSlice.actions

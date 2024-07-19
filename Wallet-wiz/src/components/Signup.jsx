@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setStatus } from '../Store/userDataSlice';
 import { useNavigate } from 'react-router-dom';
 import signUpImage from './login.jpg';
+import Lottie from 'lottie-react';
+import loadingAnimation from '../assets/loading.json'; 
+
 
 export function Signup() {
   const [name, setName] = useState('');
@@ -13,6 +16,7 @@ export function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userStatus = useSelector(state => state.userStatus);
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,11 +43,13 @@ export function Signup() {
       alert('Passwords do not match');
       return;
     }
-
+    
+    setLoading(true)
     try {
       const res = await axios.post('https://wallet-wiz-1-31s4.onrender.com/signUp', { email: email, password: password, name: name });
       if (res.status === 200) {
         await dispatch(setStatus({ email: email, password: password, name: name, loggedIn: true }));
+        setLoading(false)
         navigate('../landingPage');
       }
       else alert('try a different email')
@@ -54,6 +60,11 @@ export function Signup() {
   };
 
   return (
+    loading ? 
+    <div className="flex flex-col justify-center items-center h-full w-full">
+        <Lottie animationData={loadingAnimation} loop={true} autoplay={true} className="w-1/4 h-1/4" />
+        <p className='text-2xl'>Please wait while we sign you in</p>
+    </div> :
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="bg-[#b09cd3] rounded-2xl flex max-w-3xl p-5 items-center">
         <div className="md:w-1/2 px-8">

@@ -7,10 +7,11 @@ import loginImage from './login.jpg';
 import { sendMoney } from '../Store/userDataSlice';
 import Lottie from 'lottie-react';
 import loadingAnimation from '../assets/loading.json'; 
+
 export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const userStatus = useSelector(state => state.userStatus);
   const navigate = useNavigate();
@@ -23,11 +24,11 @@ export function Login() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await axios.post('https://wallet-wiz-1-31s4.onrender.com/login', { email, password });
+      const res = await axios.post('https://wallet-wiz-1-31s4.onrender.com/login', { email: email, password: password });
       if (res.status === 200) {
         const { balance, moneyReceived, moneySent } = res.data;
-        await dispatch(setStatus({ email, password, name: res.data.name, loggedIn: true }));
-        await dispatch(sendMoney({ balance, moneyReceived, moneySent }));
+        await dispatch(setStatus({ email: email, password: password, name: res.data.name, loggedIn: true }));
+        await dispatch(sendMoney({balance:balance,moneyReceived:moneyReceived,moneySent:moneySent}))
         navigate('../landingPage');
       } else {
         alert('wrong email or password');
@@ -40,32 +41,33 @@ export function Login() {
     }
   };
 
+
   return (
+    loading ? 
+    <div className="flex flex-col justify-center items-center h-full w-full">
+        <Lottie animationData={loadingAnimation} loop={true} autoplay={true} className="w-1/4 h-1/4" />
+        <p className='text-2xl'>Please wait while we log you in</p>
+    </div> :
     <section className="bg-gray-100 min-h-screen flex box-border justify-center items-center">
       <div className="bg-[#b09cd3] rounded-2xl flex max-w-3xl p-5 items-center">
-        {isLoading ? (
-          <div className="flex justify-center items-center h-full w-full">
-            <Lottie animationData={loadingAnimation} loop={true} autoplay={true} className="w-1/2 h-1/2" />
-          </div>
-        ) : (
           <>
             <div className="md:w-1/2 px-8">
               <h2 className="font-bold text-3xl text-[#3f205d]">Login</h2>
               <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                <input 
-                  className="p-2 mt-8 rounded-xl border" 
-                  type="email" 
-                  name="email" 
-                  placeholder="Email" 
+                <input
+                  className="p-2 mt-8 rounded-xl border"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                <input 
-                  className="p-2 rounded-xl border w-full" 
-                  type="password" 
-                  name="password" 
-                  placeholder="Password" 
+                <input
+                  className="p-2 rounded-xl border w-full"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -79,14 +81,14 @@ export function Login() {
               </form>
             </div>
             <div className="md:block hidden w-1/2">
-              <img 
-                className="rounded-2xl max-h-[1600px]" 
+              <img
+                className="rounded-2xl max-h-[1600px]"
                 src={loginImage}
                 alt="login form image"
               />
             </div>
           </>
-        )}
+        
       </div>
     </section>
   );
