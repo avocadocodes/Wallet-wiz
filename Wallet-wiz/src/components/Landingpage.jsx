@@ -90,12 +90,12 @@ export function Landingpage() {
     }
   };
 
-  // useEffect(() => {
-  //   if (!userStatus.userStatus.loggedIn) {
-  //     alert('You have been logged out. Please login again.');
-  //     navigate('/');
-  //   }
-  // }, [userStatus.userStatus.loggedIn, navigate]);
+  useEffect(() => {
+    if (!userStatus.userStatus.loggedIn) {
+      alert('You have been logged out. Please login again.');
+      navigate('/');
+    }
+  }, [userStatus.userStatus.loggedIn, navigate]);
 
   return (
     <div className="flex flex-row justify-between w-full p-5 h-screen">
