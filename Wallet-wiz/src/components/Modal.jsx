@@ -1,5 +1,5 @@
 
-const Modal = ({ show, onClose, modalContent, onSubmit , isLoading}) => {
+const Modal = ({ show, onClose, modalContent, onSubmit }) => {
   if (!show) {
     return null;
   }
@@ -12,11 +12,6 @@ const Modal = ({ show, onClose, modalContent, onSubmit , isLoading}) => {
   };
 
   return (
-    isLoading ? 
-    <div>
-      Please wait while are processing 
-    </div>
-    :
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-lg relative w-full max-w-md" onClick={(e) => e.stopPropagation()}>
         <button className="absolute top-2 right-2 text-black" onClick={onClose}>

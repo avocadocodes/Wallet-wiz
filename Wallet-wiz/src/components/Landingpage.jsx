@@ -17,8 +17,6 @@ export function Landingpage() {
   const [transactions, setTransactions] = useState([]);
   const [showRequestModal, setShowRequestModal] = useState(false);
   const [showSendModal, setShowSendModal] = useState(false);
-  const [loadingRequest, setIsloadingRequest] = useState(false);
-  const [loadingSend, setIsloadingSend] = useState(false);
   const userStatus = useSelector((state) => state.userStatus);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -54,17 +52,14 @@ export function Landingpage() {
         alert('you cannot request money from yourself')
         return ;
       }
-      setIsloadingRequest(true);
+    
       console.log(userStatus.userStatus.email);
       const res = await axios.post('https://wallet-wiz-1-31s4.onrender.com/requestMoney', {
         senderEmail: userStatus.userStatus.email,
         receiverEmail: email,
         amount: parseInt(amount, 10)
       });
-      if(res.status === 200)
-      {
-        setIsloadingRequest(false)
-      }
+      
     }
      
     catch (error) {
@@ -89,7 +84,7 @@ export function Landingpage() {
         alert('you cannot send money to yourself')
         return ;
       }
-      setIsloadingSend(true)
+    
       console.log(userStatus.userStatus.email);
       const res = await axios.post('https://wallet-wiz-1-31s4.onrender.com/sendMoney', {
         senderEmail: userStatus.userStatus.email,
@@ -100,7 +95,7 @@ export function Landingpage() {
       if (res.status === 200) {
         const { moneyReceived, moneySent, balance } = res.data;
         await dispatch(sendMoney({ balance: balance, moneyReceived: moneyReceived, moneySent: moneySent }));
-        setIsloadingSend(false)
+        
       }
     } catch (error) {
       console.error(error);
@@ -127,8 +122,8 @@ export function Landingpage() {
         </div>
         <Transaction/>
       </div>  
-      <Modal show={showRequestModal} onClose={handleCloseModal} modalContent="Request Money" onSubmit={handleRequestSubmit} isLoading ={loadingRequest} />
-      <Modal show={showSendModal} onClose={handleCloseModal} modalContent="Send Money" onSubmit={handleSendSubmit} isLoading ={loadingSend} />
+      <Modal show={showRequestModal} onClose={handleCloseModal} modalContent="Request Money" onSubmit={handleRequestSubmit}  />
+      <Modal show={showSendModal} onClose={handleCloseModal} modalContent="Send Money" onSubmit={handleSendSubmit}  />
     </div>
   );
 }
